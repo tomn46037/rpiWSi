@@ -9,7 +9,8 @@ import sys
 import gc
 from globals import *
 from ws_globals import *
-from ws_drawing import *
+#from ws_drawing_verticle import *
+from ws_drawing_horizontal import *
 from ws_local_data import *
 from ws_wu_data import *
 from ws_thread_worker import *
@@ -86,7 +87,7 @@ def ws_start(angle=0):
     def save_wu_data(args):
         
         data.update(args)
-        print "WU", args
+        #print "WU", args
     
     #===========================================================================
     # def save_local_data(args):
@@ -150,6 +151,7 @@ def ws_start(angle=0):
         #pygame.time.set_timer(LOCAL_DATA_UPDATE_EVENT, 1000) #get local sensor data
     else:
         pygame.time.set_timer(TIME_UPDATE_EVENT, 1000) #redraw screen
+        # UPDATE TIMER = 1000(ms)*60(sec)*20(minutes)
         pygame.time.set_timer(WU_DATA_UPDATE_EVENT, 1000*60*20) #get weather underground data
         #pygame.time.set_timer(LOCAL_DATA_UPDATE_EVENT, 1000*60*5) #get local sensor data
     
@@ -193,7 +195,7 @@ def ws_start(angle=0):
 
 if __name__=="__main__":
     if os.uname()[0]=="Linux":
-        ws_start(90)
+        ws_start(screen_rotation)
     else:
         ws_start(0)
 

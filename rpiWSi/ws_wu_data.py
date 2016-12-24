@@ -79,8 +79,8 @@ def get_wu_data(wu_api_key,wu_gps_coordinates,wu_language='EN',wu_icon_set='k'):
             wu_parsed_json1 = json.loads(wu_json_string1)
             wu_parsed_json2 = json.loads(wu_json_string2)
 
-        print wu_json_string1
-        print wu_json_string2
+        #print wu_json_string1
+        #print wu_json_string2
         
         if temperature_inits=="celsius":
             wu_data["temp_now"]=wu_parsed_json1['current_observation']["temp_c"]
@@ -100,7 +100,7 @@ def get_wu_data(wu_api_key,wu_gps_coordinates,wu_language='EN',wu_icon_set='k'):
             
         wu_data["local_hum_out"]=string.replace(wu_parsed_json1['current_observation']["relative_humidity"],"%","")
         #wu_data["local_pressure"]=unicode(int(float(wu_parsed_json1['current_observation']["pressure_mb"])*750.06/1000.0))
-        wu_data["local_pressure"]=unicode(float(wu_parsed_json1['current_observation']["pressure_in"]))
+        wu_data["local_pressure"]=unicode("%2.1f"%float(wu_parsed_json1['current_observation']["pressure_in"]))
         
             
         if icons.has_key(wu_data["icon_0"]):wu_data["image_0"]=icons[wu_data["icon_0"]]

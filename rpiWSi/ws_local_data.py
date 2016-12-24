@@ -19,7 +19,9 @@ def get_time_date():
 
     dt={}
     dt["current_time"] = time.strftime("%H:%M:%S")
+    # 12/24 hour format
     dt["current_time"] = time.strftime("%H:%M")
+    dt["current_time"] = time.strftime("%I:%M")+time.strftime("%p")[:1].lower()
     dt["current_date"] = days_of_week[int(time.strftime("%w"))]+", "+time.strftime("%d")+\
     " "+months[int(time.strftime("%m"))]
     '''
