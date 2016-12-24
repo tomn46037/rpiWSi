@@ -12,6 +12,8 @@ import time
 from datetime import date
 from datetime import *
 
+from globals import *
+
 def draw_data(screen,page,data,angle):
     
     def draw_text(screen,text,font,size,left,top,width,align="center",text_color=WHITE,back_color=BACK):
@@ -150,7 +152,7 @@ def draw_data(screen,page,data,angle):
     text=correct_data(data.get("local_pressure"))
     #text=text+u"мм"
     pressure_rect=draw_text(screen,text,'fonts/calibri.ttf',fs, 0-ww               , yy, screen_width/3,"center",WHITE,BACK)
-    text=correct_data(data.get("wind_kph"))
+    text=correct_data(data.get("wind_mph"))
     #text=text+u"м/с"
     wind_rect=draw_text(screen,text,'fonts/calibri.ttf',fs, screen_width/3-ww  , yy, screen_width/3,"center",WHITE,BACK)
     text=correct_data(data.get("local_hum_out"))
@@ -242,7 +244,7 @@ def draw_data(screen,page,data,angle):
 
 def correct_data(val):
     if val==None:
-        return u"н.д."
+        return u"Unk"
     else:
         return unicode(val)
     
@@ -250,7 +252,7 @@ def format_temperature(temp):
     try:
         f=int(round(float(temp)))
         if f>0:
-            return u"+"+unicode(f)
+            return u""+unicode(f)
         if f<0:
             return unicode(f)
         if f==0:

@@ -7,6 +7,7 @@ import os
 
 import sys
 import gc
+from globals import *
 from ws_globals import *
 from ws_drawing import *
 from ws_local_data import *
@@ -85,7 +86,7 @@ def ws_start(angle=0):
     def save_wu_data(args):
         
         data.update(args)
-        #print "WU", args
+        print "WU", args
     
     #===========================================================================
     # def save_local_data(args):

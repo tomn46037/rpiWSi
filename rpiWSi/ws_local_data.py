@@ -11,6 +11,7 @@ import gc
 import random
 import os
 #print time.strftime('%a, %d %b %Y %H:%M:%S GMT%z')
+from lang_en import *
 
 import urllib2
 
