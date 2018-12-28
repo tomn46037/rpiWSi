@@ -12,7 +12,7 @@ from ws_globals import *
 #from ws_drawing_verticle import *
 from ws_drawing_horizontal import *
 from ws_local_data import *
-from ws_wu_data import *
+from ws_noaaUI_data import *
 from ws_thread_worker import *
 from BaseHTTPServer import BaseHTTPRequestHandler,HTTPServer
 

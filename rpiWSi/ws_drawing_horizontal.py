@@ -11,6 +11,8 @@ from ws_globals import *
 import time
 from datetime import date
 from datetime import *
+import urllib2
+from pprint import pprint
 
 from globals import *
 
@@ -61,7 +63,25 @@ def draw_data(screen,page,data,angle):
         screen.blit(surface, rect)
         if show_rect: pygame.gfxdraw.rectangle(screen, rect, WHITE)
         return unrotated_rect
-    
+
+    def draw_image_url(screen, url, screen_rect,back_color=BACK):
+        # If the file doesn't exist.. 
+        # Go download the URL into the cache directory.. 
+
+        global app_dir
+        file_name = os.path.realpath("{1}/cache/{0}".format(url.replace('/', '_'),app_dir))
+
+        if not os.path.isfile(file_name):
+
+            data_request = urllib2.urlopen(url)
+            image_data = data_request.read()
+
+            with open(file_name, 'w') as OUTPUT:
+                OUTPUT.write(image_data)
+                OUTPUT.close()
+
+        return draw_image(screen, "cache/%s" % url.replace('/', '_'), screen_rect, BACK)
+
     def draw_image(screen,file_name, screen_rect,back_color=BACK):
         global app_dir
         file_name = os.path.realpath("{1}/{0}".format(file_name,app_dir))
@@ -133,21 +153,22 @@ def draw_data(screen,page,data,angle):
     yy=yy+rr.height-1
     hh=50
     try:
-        if data.get("image_1")<>None:            draw_image(screen,'images/'+data.get("image_1"), Rect(xx,  yy,xx_width,hh),BACK)
+        if data.get("image_1")<>None:
+            draw_image_url(screen, data.get("image_1"), Rect(xx,  yy,xx_width,hh),BACK)
     except:
         draw_image(screen,'images/na.png', Rect(xx, yy,xx_width,hh),BACK)
         
     yy=yy+80
     try:
         if data.get("image_2")<>None:
-            draw_image(screen,'images/'+data.get("image_2"), Rect(xx,  yy,xx_width,hh),BACK)
+            draw_image_url(screen,data.get("image_2"), Rect(xx,  yy,xx_width,hh),BACK)
     except:
         draw_image(screen,'images/na.png', Rect(xx,  yy,xx_width,hh),BACK)
         
     yy=yy+80
     try:
         if data.get("image_3")<>None:
-            draw_image(screen,'images/'+data.get("image_3"), Rect(xx,yy,xx_width,hh),BACK)
+            draw_image_url(screen,data.get("image_3"), Rect(xx,yy,xx_width,hh),BACK)
     except:
         draw_image(screen,'images/na.png', Rect(xx,yy,xx_width,hh),BACK)
         
@@ -177,8 +198,11 @@ def draw_data(screen,page,data,angle):
     draw_text(screen,text,'fonts/calibri.ttf' ,60, screen_width/2, yy, screen_width/2,"center",WHITE,BACK)
 
     #image forecast today
-    if data.get("image_0")<>None:
-        draw_image(screen,'images/'+unicode(data.get("image_0")), Rect(0,yy-4,screen_width/2,76),BACK)
+    try:
+        if data.get("image_0")<>None:
+            draw_image_url(screen,unicode(data.get("image_0")), Rect(0,yy-4,screen_width/2,76),BACK)
+    except:
+        draw_image(screen,'images/na.png', Rect(0,yy-4,screen_width/2,76))
            
    #forecast today
     yy=yy+50
