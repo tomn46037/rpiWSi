@@ -145,21 +145,8 @@ def get_wu_data(wu_api_key,wu_gps_coordinates,wu_language='EN',wu_icon_set='k'):
         print "Giving up"
         return {}
 
-    # Now go out and download the latest RADAR image to the cache.
-    # https://radar.weather.gov/lite/N0R/%s_0.png
-    radar_url = "https://radar.weather.gov/lite/N0R/%s_0.png" % data['location']['wfo']
-
-    global app_dir
-    file_name = os.path.realpath("{1}/cache/{0}".format('radar.png',app_dir))
-
-    if not os.path.isfile(file_name):
-
-        data_request = urllib2.urlopen(radar_url)
-        image_data = data_request.read()
-
-        with open(file_name, 'w') as OUTPUT:
-            OUTPUT.write(image_data)
-            OUTPUT.close()
+    # Now go out save the URL of the latest RADAR image to the cache.
+    wu_data['radar_url'] = "https://radar.weather.gov/lite/N0R/%s_0.png" % data['location']['wfo']
 
     return wu_data
 

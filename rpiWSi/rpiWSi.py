@@ -15,6 +15,7 @@ from ws_local_data import *
 from ws_noaaUI_data import *
 from ws_thread_worker import *
 from BaseHTTPServer import BaseHTTPRequestHandler,HTTPServer
+from pprint import pprint
 
 
 def isPointInsideRect(x, y, rect):
@@ -161,6 +162,20 @@ def ws_start(angle=0):
         for event in pygame.event.get():
             if event.type ==MOUSEBUTTONDOWN:
                 mouse_button = 1
+
+                # Now go out and download the latest RADAR image to the cache.
+                # https://radar.weather.gov/lite/N0R/%s_0.png
+
+                global app_dir
+                file_name = os.path.realpath("{0}/cache/radar.png".format(app_dir))
+
+                data_request = urllib2.urlopen(data['radar_url'])
+                image_data = data_request.read()
+
+                with open(file_name, 'w') as OUTPUT:
+                    OUTPUT.write(image_data)
+                    OUTPUT.close()
+
                 screen.fill(BACK)
 		radar_image_full = pygame.image.load('cache/radar.png')
 		radar_image = pygame.transform.scale(radar_image_full, (320,240))
