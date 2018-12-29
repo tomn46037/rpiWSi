@@ -71,6 +71,7 @@ def ws_start(angle=0):
     TIME_UPDATE_EVENT = USEREVENT
     WU_DATA_UPDATE_EVENT = USEREVENT+1
     LOCAL_DATA_UPDATE_EVENT = USEREVENT+2
+    REMOVE_RADAR = USEREVENT+3
     
     def show_sizeof(x,level=0):
         #print "\t"*level,x.__class__, sys.getsizeof(x)#, x
@@ -155,9 +156,25 @@ def ws_start(angle=0):
         pygame.time.set_timer(WU_DATA_UPDATE_EVENT, 1000*60*20) #get weather underground data
         #pygame.time.set_timer(LOCAL_DATA_UPDATE_EVENT, 1000*60*5) #get local sensor data
     
+    mouse_button=0
     while True: # main game loop
         for event in pygame.event.get():
-            if event.type == QUIT or event.type ==MOUSEBUTTONUP:
+            if event.type ==MOUSEBUTTONDOWN:
+                mouse_button = 1
+                screen.fill(BACK)
+		radar_image_full = pygame.image.load('cache/radar.png')
+		radar_image = pygame.transform.scale(radar_image_full, (320,240))
+                screen.blit(radar_image, (0,0))
+                pygame.display.flip()
+            if event.type == MOUSEBUTTONUP:
+                pygame.time.set_timer(REMOVE_RADAR, 1000*5) # In 5 seconds remove the radar image.
+
+            if event.type == REMOVE_RADAR:
+                mouse_button = 0
+                screen.fill(BACK)
+                draw_data(screen,page,data,angle)
+                pygame.display.flip()
+            if event.type == QUIT:
                 gc.collect()#unused memory clean
                 pygame.display.flip()#redraw screen
                 pygame.quit()
@@ -165,7 +182,7 @@ def ws_start(angle=0):
                 #serv.socket.close()
                 sys.exit()
                 return
-            elif event.type == TIME_UPDATE_EVENT: #redraw time and data
+            elif event.type == TIME_UPDATE_EVENT and mouse_button==0: #redraw time and data
                 dt_data=get_time_date()
                 data.update(dt_data)
      
