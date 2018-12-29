@@ -130,21 +130,15 @@ def draw_data(screen,page,data,angle):
     yy=0
     xx=screen_width/4*3+5
     xx_width = screen_width/4*3+5
-    text=str_tomorrow
+    text=data.get('time_1')
     rr=draw_text(screen,text,'fonts/calibri.ttf',13, xx, yy, xx_width,"center",WHITE,BACK)
     
     yy=yy+80
-    next_day=date.today()+timedelta(days=2)
-    wd=(next_day).isoweekday()
-    if wd==7: wd=0
-    text=days_of_week[wd]+", "+unicode(next_day.day)+u" "+short_months[next_day.month]
+    text=data.get('time_2')
     draw_text(screen,text,'fonts/calibri.ttf',13, xx, yy, xx_width,"center",WHITE,BACK)
 
     yy=yy+80
-    next_day=date.today()+timedelta(days=3)
-    wd=(next_day).isoweekday()
-    if wd==7: wd=0
-    text=days_of_week[wd]+", "+unicode(next_day.day)+u" "+short_months[next_day.month]
+    text=data.get('time_3')
     draw_text(screen,text,'fonts/calibri.ttf',13, xx, yy, xx_width,"center",WHITE,BACK)
     
     #images forecast free days
