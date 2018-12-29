@@ -177,9 +177,10 @@ def ws_start(angle=0):
                     OUTPUT.close()
 
                 screen.fill(BACK)
-		radar_image_full = pygame.image.load('cache/radar.png')
-		radar_image = pygame.transform.scale(radar_image_full, (320,240))
-                screen.blit(radar_image, (0,0))
+		radar_image = pygame.image.load('cache/radar.png')
+                # Leaving this here - incase we ever want to move back to scaling. (Don't forget to pay attention the variable names.)
+		#radar_image = pygame.transform.scale(radar_image_full, (320,240), ((600-320)/2, (550-240)/2, 320, 240))
+                screen.blit(radar_image, (0,0), ((600-320)/2, (550-240)/2, 320, 240))
                 pygame.display.flip()
             if event.type == MOUSEBUTTONUP:
                 pygame.time.set_timer(REMOVE_RADAR, 1000*5) # In 5 seconds remove the radar image.
