@@ -112,23 +112,23 @@ def get_wu_data(wu_api_key,wu_gps_coordinates,wu_language='EN',wu_icon_set='k'):
 
 
         wu_data["time_0"]=forecast_time[0]
-        wu_data["temp_fore_0_min"]=forecast_data['temperature'][0]
-        wu_data["temp_fore_0_max"]=forecast_data['temperature'][1]
+        wu_data["temp_fore_0_min"]=data['time']['tempLabel'][0]
+        wu_data["temp_fore_0_max"]=forecast_data['temperature'][0]
         wu_data["conditions_0"]=observations['Weather']
 
         wu_data["time_1"]=forecast_time[1]
-        wu_data["temp_fore_1_min"]=forecast_data['temperature'][2]
-        wu_data["temp_fore_1_max"]=forecast_data['temperature'][3]
+        wu_data["temp_fore_1_min"]=data['time']['tempLabel'][1]
+        wu_data["temp_fore_1_max"]=forecast_data['temperature'][1]
         wu_data["conditions_1"]=forecast_data['weather'][1]
 
         wu_data["time_2"]=forecast_time[2]
-        wu_data["temp_fore_2_min"]=forecast_data['temperature'][4]
-        wu_data["temp_fore_2_max"]=forecast_data['temperature'][5]
+        wu_data["temp_fore_2_min"]=data['time']['tempLabel'][2]
+        wu_data["temp_fore_2_max"]=forecast_data['temperature'][2]
         wu_data["conditions_2"]=forecast_data['weather'][2]
 
         wu_data["time_3"]=forecast_time[3]
-        wu_data["temp_fore_3_min"]=forecast_data['temperature'][6]
-        wu_data["temp_fore_3_max"]=forecast_data['temperature'][7]
+        wu_data["temp_fore_3_min"]=data['time']['tempLabel'][3]
+        wu_data["temp_fore_3_max"]=forecast_data['temperature'][3]
         wu_data["conditions_3"]=forecast_data['weather'][3]
 
         wu_data['image_1']=forecast_data['iconLink'][1]

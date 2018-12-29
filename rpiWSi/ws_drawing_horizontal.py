@@ -174,13 +174,13 @@ def draw_data(screen,page,data,angle):
         
     #temp forecast free days
     yy=0+text_height+hh-2
-    text=format_temperature(data.get("temp_fore_1_min"))+u"°,"+format_temperature(data.get("temp_fore_1_max"))+u"°"
+    text=format_temperature(data.get("temp_fore_1_min"))+u" "+format_temperature(data.get("temp_fore_1_max"))+u"°"
     draw_text(screen,text,'fonts/calibri.ttf',17, xx, yy, xx_width,"center",WHITE,BACK)
     yy=yy+80
-    text=format_temperature(data.get("temp_fore_2_min"))+u"°,"+format_temperature(data.get("temp_fore_2_max"))+u"°"
+    text=format_temperature(data.get("temp_fore_2_min"))+u" "+format_temperature(data.get("temp_fore_2_max"))+u"°"
     draw_text(screen,text,'fonts/calibri.ttf',17, xx, yy, xx_width,"center",WHITE,BACK)
     yy=yy+80
-    text=format_temperature(data.get("temp_fore_3_min"))+u"°,"+format_temperature(data.get("temp_fore_3_max"))+u"°"
+    text=format_temperature(data.get("temp_fore_3_min"))+u" "+format_temperature(data.get("temp_fore_3_max"))+u"°"
     # BOLD draw_text(screen,text,'fonts/calibrib.ttf',17, xx, yy, xx_width,"center",WHITE,BACK)
     draw_text(screen,text,'fonts/calibri.ttf',17, xx, yy, xx_width,"center",WHITE,BACK)
  
